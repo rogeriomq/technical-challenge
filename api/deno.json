@@ -41,13 +41,18 @@
       ]
     }
   },
+  "tasks": {
+    "dev": "deno run --allow-net --allow-env  --watch index.ts",
+    "run": "deno run --allow-net --allow-env index.ts",
+    "test": "deno test"
+  },
   "test": {
     "files": {
-      "exclude": [
-        "src/testdata/"
-      ],
+      "exclude": [],
       "include": [
-        "src/"
+        "model/",
+        "server/",
+        "utils/"
       ]
     }
   }
