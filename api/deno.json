@@ -9,7 +9,11 @@
         "src/testdata/"
       ],
       "include": [
-        "src/"
+        "src/",
+        "index.ts",
+        "deps.ts",
+        "dev_deps.ts",
+        "deno.json"
       ]
     },
     "options": {
@@ -44,15 +48,14 @@
   "tasks": {
     "dev": "deno run --allow-net --allow-env  --watch index.ts",
     "run": "deno run --allow-net --allow-env index.ts",
-    "test": "deno test"
+    "test": "deno test -A",
+    "test:w": "deno test --watch -A src/test/"
   },
   "test": {
     "files": {
       "exclude": [],
       "include": [
-        "model/",
-        "server/",
-        "utils/"
+        "src/test/"
       ]
     }
   }
