@@ -1,12 +1,12 @@
 import { validateCpf } from '../utils/validateCpf.ts';
-import ModelCpfCnpj from './modelCpfCnpj.ts';
+import { ICpfCnpjModel } from './ICpfCnpjModel.ts';
 
 type CpfType = {
   id?: number;
   value: string | '';
 };
 
-class Cpf implements ModelCpfCnpj {
+export class Cpf implements ICpfCnpjModel {
   id: number | undefined;
   value: string;
 
@@ -29,5 +29,3 @@ class Cpf implements ModelCpfCnpj {
     return this.value.replace(/[^\d]/g, '');
   }
 }
-
-export default Cpf;

@@ -1,4 +1,4 @@
-export default interface ModelCpfCnpj {
+export interface ICpfCnpjModel {
   validate(): string | null;
   cleaned(): string;
 }
