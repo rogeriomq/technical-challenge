@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  db:
+    container_name: postgres
+    image: postgres:15.0
+    environment:
+      POSTGRES_USER: 'neoway'
+      POSTGRES_PASSWORD: 'q1w2e3r4'
+      PGDATA: /data/postgres
+      POSTGRES_DB: 'db'
+    ports:
+      - "5432:5432"
+    networks:
+      neoway.challenge:
+
+networks:
+  neoway.challenge:
