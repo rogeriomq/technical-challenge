@@ -47,6 +47,7 @@
   },
   "tasks": {
     "dev": "deno run --allow-net --allow-env  --watch index.ts",
+    "init:db": "deno run -A --unstable npm:prisma db push",
     "run": "deno run --allow-net --allow-env index.ts",
     "test": "deno test -A",
     "test:w": "deno test --watch -A src/test/"
