@@ -1,7 +1,7 @@
 import { validateCpf } from '../utils/validateCpf.ts';
 import { ICpfCnpjModel } from './ICpfCnpjModel.ts';
 
-type CpfType = {
+export type CpfType = {
   id?: number;
   value: string | '';
 };
@@ -19,6 +19,11 @@ export class Cpf implements ICpfCnpjModel {
     return new Cpf({ id: undefined, value: '' });
   }
 
+  /**
+   * Validate a Cpf value prop.
+   *
+   * @returns String Error or null when is valid.
+   */
   validate(): string | null {
     return validateCpf(this.value + '');
   }

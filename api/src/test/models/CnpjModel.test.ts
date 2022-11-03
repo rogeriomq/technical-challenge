@@ -6,7 +6,7 @@ import {
   generateCnpj,
   it,
 } from '../../../dev_deps.ts';
-import Cnpj from '../../model/cnpj.model.ts';
+import { Cnpj } from '../../models/CnpjModel.ts';
 
 describe('Model -> CNPJ', () => {
   describe('when a default instance: ', () => {

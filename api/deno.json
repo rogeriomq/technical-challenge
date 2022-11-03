@@ -6,7 +6,7 @@
   "fmt": {
     "files": {
       "exclude": [
-        "src/testdata/"
+        "src/testData/"
       ],
       "include": [
         "src/",
@@ -46,9 +46,9 @@
     }
   },
   "tasks": {
-    "dev": "deno run --allow-net --allow-env  --watch index.ts",
-    "init:db": "deno run -A --unstable npm:prisma db push",
-    "run": "deno run --allow-net --allow-env index.ts",
+    "dev": "deno run -A --watch index.ts",
+    "init:db": "deno run -A initDatabase.ts",
+    "run": "deno run --allow-net --allow-env --allow-read index.ts",
     "test": "deno test -A",
     "test:w": "deno test --watch -A src/test/"
   },
