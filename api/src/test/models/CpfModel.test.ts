@@ -6,7 +6,7 @@ import {
   generateCpf,
   it,
 } from '../../../dev_deps.ts';
-import Cpf from '../../model/cpf.model.ts';
+import { Cpf } from '../../models/CpfModel.ts';
 
 describe('Model -> CPF', () => {
   describe('when a default instance: ', () => {

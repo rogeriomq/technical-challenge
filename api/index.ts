@@ -1,1 +1,2 @@
-import './src/server/server.ts';
+import { bootstrap } from './src/server/server.ts';
+bootstrap();

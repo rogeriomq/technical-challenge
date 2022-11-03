@@ -1,7 +1,7 @@
 import { validateCnpj } from '../utils/validateCnpj.ts';
 import { ICpfCnpjModel } from './ICpfCnpjModel.ts';
 
-type CnpjType = {
+export type CnpjType = {
   id?: number;
   value: string | '';
 };
