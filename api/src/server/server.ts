@@ -1,8 +1,11 @@
-import { Application, Context, Router } from '../../deps.ts';
+import { Application, Context, dotEnvConfig, Router } from '../../deps.ts';
+import { CnpjApi } from './api/cnpj/CnpjApi.ts';
 
 import { CpfApi } from './api/cpf/CpfApi.ts';
 import { StatusApi } from './api/status/StatusApi.ts';
 import { CountRequests } from './CountRequests.ts';
+
+dotEnvConfig({ export: true, path: '.env' });
 
 export const app = new Application();
 const router = new Router();
@@ -29,7 +32,7 @@ app.use(async (ctx, next) => {
 });
 
 new CpfApi().populate(router);
-
+new CnpjApi().populate(router);
 new StatusApi({ startTime }).populate(router);
 
 app.use(router.routes());
@@ -42,5 +45,6 @@ app.addEventListener('listen', ({ port }) => {
 });
 
 export const bootstrap = async () => {
-  await app.listen({ port: 4444 });
+  const port = parseInt(Deno.env.get('SERVER_PORT') || '4444');
+  await app.listen({ port });
 };
