@@ -46,9 +46,9 @@
     }
   },
   "tasks": {
-    "dev": "deno run -A --watch index.ts",
+    "dev": "deno run -A --watch main.ts",
     "init:db": "deno run -A initDatabase.ts",
-    "run": "deno run --allow-net --allow-env --allow-read index.ts",
+    "run": "deno run --allow-net --allow-env --allow-read main.ts",
     "test": "deno test -A",
     "test:w": "deno test --watch -A src/test/"
   },

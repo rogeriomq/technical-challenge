@@ -1,18 +1,24 @@
-FROM denoland/deno:1.27.0
+FROM denoland/deno:1.27.1
 
-EXPOSE 4444
+LABEL version="1.0.0"
+LABEL description="Neoway API"
 
 WORKDIR /server
 
 USER deno
 
 COPY deps.ts .
+COPY dev_deps.ts .
 
-RUN deno cache deps.ts
+RUN deno cache deps.ts dev_deps.ts
 
+USER root
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.5.0/wait /wait
+RUN chmod +x /wait
+
+USER deno
 ADD . .
 
-RUN deno cache src/main.ts
+EXPOSE 4444
 
-CMD ["run", "--allow-net", "--allow-env", "src/main.ts"]
-
+CMD /wait && deno task run

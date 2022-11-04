@@ -2,17 +2,35 @@ version: '3.7'
 
 services:
   db:
-    container_name: postgres
+    container_name: neoway_db
     image: postgres:15.0
+    restart: always
+    env_file:
+      - ./api/.env
     environment:
-      POSTGRES_USER: 'neoway'
-      POSTGRES_PASSWORD: 'q1w2e3r4'
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASS
       PGDATA: /data/postgres
-      POSTGRES_DB: 'db'
+      POSTGRES_DB: $DB_NAME
     ports:
-      - "5432:5432"
+      - $DB_PORT:5432
     networks:
-      neoway.challenge:
-
+      - neoway.challenge
+  api:
+    build:
+      context: api/.
+    container_name: neoway_api
+    # restart: always
+    env_file:
+      - ./api/.env
+    environment:
+      - WAIT_HOSTS=$DB_HOST:5432
+    ports:
+      - $SERVER_PORT:4444
+    networks:
+      - neoway.challenge
+    depends_on:
+      - db
 networks:
   neoway.challenge:
+    driver: 'bridge'

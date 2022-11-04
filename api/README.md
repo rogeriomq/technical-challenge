@@ -13,9 +13,9 @@ deno task init:db
 ```
 _To see all deno task options, run: `deno task`._
 
-4. Exceute task `run` or `dev`(dev to watch mode):
+4. Exceute task `dev`(dev to watch mode):
 ```bash
-deno task run|dev
+deno task dev
 ```
 5. Tests - execute:
 ```bash

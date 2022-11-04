@@ -2,7 +2,7 @@ import { dotEnvConfig, PostgresClient } from '../../../../deps.ts';
 const env = dotEnvConfig({ path: '.env' });
 
 const database = new PostgresClient({
-  hostname: env['DB_HOST'] || '127.0.0.1',
+  hostname: env['DB_HOST'] || 'host.docker.internal',
   user: env['DB_USER'],
   password: env['DB_PASS'],
   database: env['DB_NAME'],
