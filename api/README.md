@@ -1,5 +1,9 @@
-# **DENO API**
+# **Challenge - API**
 > This API use Deno, Oak, PostgeSQL
+
+## Instalation
+**Requiriments**
+ - Deno 1.27.x
 
 ## **Run**
 1. Create a `.env` file, copy of the `env.example`.
@@ -9,17 +13,17 @@ $ deno cache deps.ts dev_deps.ts
 ```
 3. Initialize database with:
 ```bash
-deno task init:db
+$ deno task init:db
 ```
 _To see all deno task options, run: `deno task`._
 
 4. Exceute task `dev`(dev to watch mode):
 ```bash
-deno task dev
+$ deno task dev
 ```
 5. Tests - execute:
 ```bash
-deno task test
+$ deno task test
 ```
 
 ## **Routes**
