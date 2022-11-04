@@ -6,7 +6,7 @@ export type filterType = {
 
 export interface ICpfRepository {
   findAll({ like }: filterType): Promise<unknown>;
-  create(cpf: Cpf): Promise<void>;
-  update(id: number, cpf: Cpf): Promise<void>;
+  create(cpf: Cpf): Promise<unknown>;
+  update(id: number, cpf: Cpf): Promise<unknown>;
   delete(id: number): Promise<unknown>;
 }
