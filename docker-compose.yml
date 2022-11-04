@@ -24,6 +24,7 @@ services:
     env_file:
       - ./api/.env
     environment:
+      # When run with docker, DB_HOST must be exactly container_name of the db service(eg: neoway_db).
       - WAIT_HOSTS=$DB_HOST:5432
     ports:
       - $SERVER_PORT:4444
