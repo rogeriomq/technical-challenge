@@ -20,7 +20,7 @@ services:
     build:
       context: api/.
     container_name: neoway_api
-    # restart: always
+    restart: always
     env_file:
       - ./api/.env
     environment:
@@ -32,6 +32,17 @@ services:
       - neoway.challenge
     depends_on:
       - db
+  spa:
+    build:
+      context: spa/.
+    container_name: neoway_spa
+    restart: always
+    env_file:
+      - ./spa/.env
+    ports:
+      - 8080:8080
+    networks:
+      - neoway.challenge
 networks:
   neoway.challenge:
     driver: 'bridge'
