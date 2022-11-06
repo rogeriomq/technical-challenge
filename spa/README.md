@@ -3,8 +3,8 @@
 
 ## Instalation
 **Requiriments**
-- NodeJS 16.x
-- NPM 8.x or Yarn 1.22.x
+- NodeJS >= 16.x
+- NPM >= 8.x or Yarn >= 1.22.x
 
 ### Using NPM
 Install packages:
@@ -12,6 +12,8 @@ Install packages:
 $ npm install
  ```
 ### Run Project
+
+Use `env-example` with model to create `env`` file.
 
 On dev run:
 ```bash

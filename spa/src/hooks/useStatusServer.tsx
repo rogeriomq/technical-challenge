@@ -22,7 +22,7 @@ export const useStatusServer = () => {
     if (watchMode) {
       interval = setInterval(async() => {
         await getStatusServer()
-      }, 3000)
+      }, parseInt(import.meta.env.VITE_STATUS_MONITOR_TIMEOUT || '5000'))
     }
     return () => clearInterval(interval)
   }, [getStatusServer, watchMode])
