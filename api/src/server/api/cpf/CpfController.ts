@@ -6,20 +6,22 @@ import {
 } from '../../../../deps.ts';
 import { ModelError } from '../../../exceptions/errors.ts';
 import { Cpf } from '../../../models/models.ts';
-import { CpfRepository } from '../../repositories/impl/CpfRepository.ts';
-
+import {
+  ICpfRepository,
+  QueryType,
+} from '../../repositories/ICpfRepository.ts';
 export class CpfController {
-  #cpfRepository: CpfRepository;
+  #cpfRepository: ICpfRepository;
 
-  constructor(repo: CpfRepository) {
+  constructor(repo: ICpfRepository) {
     this.#cpfRepository = repo;
   }
 
   list = async (context: RouterContext<string>) => {
     try {
-      const { like } = ctxHelpers.getQuery(context);
-      console.log({ like });
-      const result = await this.#cpfRepository.findAll({ like });
+      const { like, sort } = ctxHelpers.getQuery(context) as QueryType;
+      console.log({ like, sort });
+      const result = await this.#cpfRepository.findAll({ like, sort });
       context.response.status = HttpStatus.OK;
       context.response.body = {
         data: result,
@@ -31,12 +33,6 @@ export class CpfController {
           message: 'Unable to retrieve records.',
         },
       };
-
-      if (error instanceof PostgresError) {
-        context.response.status = HttpStatus.InternalServerError;
-        return context;
-      }
-
       console.log(error);
     }
   };
@@ -54,7 +50,6 @@ export class CpfController {
       context.response.status = HttpStatus.InternalServerError;
 
       if (error instanceof ModelError) {
-        context.response.status = HttpStatus.BadRequest;
         context.response.body = {
           error: {
             message: error.message,
@@ -96,12 +91,17 @@ export class CpfController {
         .body({ limit: bodyLimit, type: 'json' })
         .value;
 
-      await this.#cpfRepository.update(id, new Cpf({ value: cpf }));
-      context.response.status = HttpStatus.OK;
+      const updated = await this.#cpfRepository.update(
+        id,
+        new Cpf({ value: cpf }),
+      );
+      context.response.status = updated > 0
+        ? HttpStatus.OK
+        : HttpStatus.NoContent;
     } catch (error) {
+      context.response.status = HttpStatus.InternalServerError;
       console.log(error);
       if (error instanceof ModelError) {
-        context.response.status = HttpStatus.BadRequest;
         context.response.body = {
           error: {
             message: error.message,
@@ -163,18 +163,6 @@ export class CpfController {
         context.response.body = {
           error: {
             message: `${error.message.replace('.', ' bytes.')}`,
-          },
-        };
-        return;
-      }
-
-      if (error instanceof PostgresError) {
-        const isDuplicateKey = error.message.includes('cpf_value_unique');
-        context.response.body = {
-          error: {
-            message: isDuplicateKey
-              ? 'This CPF already exists'
-              : 'This CPF could not be updated.',
           },
         };
         return;

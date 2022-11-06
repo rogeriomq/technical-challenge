@@ -1,6 +1,7 @@
 import { db } from "./src/server/repositories/database/db.ts";
 
 console.log('>>> Initialize Database...');
+
 // Table CNPJ
 await db.queryObject(`
   DROP TABLE IF EXISTS "public"."Cnpj";

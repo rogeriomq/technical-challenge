@@ -1,4 +1,10 @@
-import { Application, Context, dotEnvConfig, Router } from '../../deps.ts';
+import {
+  Application,
+  Context,
+  dotEnvConfig,
+  oakCors,
+  Router,
+} from '../../deps.ts';
 import { CnpjApi } from './api/cnpj/CnpjApi.ts';
 
 import { CpfApi } from './api/cpf/CpfApi.ts';
@@ -13,6 +19,14 @@ const router = new Router();
 const startTime = Date.now();
 const ignoreCountRequestPaths = ['/api/status'];
 
+const PORT = parseInt(Deno.env.get('SERVER_PORT') || '4444');
+
+app.use(
+  oakCors({
+    origin: `*`,
+  }),
+);
+
 // Logger
 app.use(async (ctx: Context, next) => {
   if (!ignoreCountRequestPaths.includes(ctx.request.url.pathname)) {
@@ -20,7 +34,9 @@ app.use(async (ctx: Context, next) => {
   }
   await next();
   const rt = ctx.response.headers.get('X-Response-Time');
-  console.log(`${ctx.request.method} ${ctx.request.url} - ${rt}`);
+  console.log(
+    `${ctx.request.method}[${ctx.response.status}] ${ctx.request.url} - ${rt}`,
+  );
 });
 
 // Timing
@@ -45,6 +61,5 @@ app.addEventListener('listen', ({ port }) => {
 });
 
 export const bootstrap = async () => {
-  const port = parseInt(Deno.env.get('SERVER_PORT') || '4444');
-  await app.listen({ port });
+  await app.listen({ port: PORT });
 };

@@ -6,20 +6,20 @@ import {
 } from '../../../../deps.ts';
 import { ModelError } from '../../../exceptions/errors.ts';
 import { Cnpj } from '../../../models/models.ts';
-import { CnpjRepository } from '../../repositories/impl/CnpjRepository.ts';
-
+import type { QueryType } from '../../repositories/ICnpjRepository.ts';
+import { ICnpjRepository } from '../../repositories/ICnpjRepository.ts';
 export class CnpjController {
-  #cnpjRepository: CnpjRepository;
+  #cnpjRepository: ICnpjRepository;
 
-  constructor(repo: CnpjRepository) {
+  constructor(repo: ICnpjRepository) {
     this.#cnpjRepository = repo;
   }
 
   list = async (context: RouterContext<string>) => {
     try {
-      const { like } = ctxHelpers.getQuery(context);
-      console.log({ like });
-      const result = await this.#cnpjRepository.findAll({ like });
+      const { like, sort } = ctxHelpers.getQuery(context) as QueryType;
+      console.log({ like, sort });
+      const result = await this.#cnpjRepository.findAll({ like, sort });
       context.response.status = HttpStatus.OK;
       context.response.body = {
         data: result,

@@ -2,20 +2,17 @@ import { ModelError } from '../../../exceptions/errors.ts';
 import { Cpf, CpfType } from '../../../models/CpfModel.ts';
 import { onlyDigits } from '../../../utils/onlyDigits.ts';
 import { db } from '../database/db.ts';
-import { filterType, ICpfRepository } from '../ICpfRepository.ts';
-
+import type { QueryType } from '../ICpfRepository.ts';
+import { ICpfRepository } from '../ICpfRepository.ts';
 export class CpfRepository implements ICpfRepository {
-  async findAll({ like }: filterType) {
+  async findAll({ like, sort }: QueryType): Promise<CpfType[]> {
     try {
-      let exp;
-
-      if (like) {
-        exp = `WHERE c."value" LIKE \'%${onlyDigits(like)}%\'`;
-      }
+      const exp = like && `WHERE c."value" LIKE \'%${onlyDigits(like)}%\'`;
+      const order = sort || 'asc';
       const where = exp || '';
       const { rows } = await db.queryObject<CpfType>({
         text:
-          `SELECT c.id, c."value" FROM "Cpf" as c ${where} ORDER BY "value"`,
+          `SELECT c.id, c."value" FROM "Cpf" as c ${where} ORDER BY "value" ${order}`,
       });
 
       return rows;
@@ -41,7 +38,7 @@ export class CpfRepository implements ICpfRepository {
     }
   }
 
-  async update(id: number, cpf: Cpf): Promise<void> {
+  async update(id: number, cpf: Cpf): Promise<number> {
     const isInvalid = cpf.validate();
     if (isInvalid) {
       throw new ModelError(isInvalid);
@@ -49,9 +46,10 @@ export class CpfRepository implements ICpfRepository {
     try {
       const result = await db.queryObject({
         text: `UPDATE "Cpf" SET "value" = $cpf WHERE "id"=$id `,
-        args: { cpf: cpf.cleaned(), id: id },
+        args: { cpf: cpf.cleaned(), id },
       });
       console.log({ result });
+      return result.rowCount || 0;
     } catch (error) {
       throw error;
     }

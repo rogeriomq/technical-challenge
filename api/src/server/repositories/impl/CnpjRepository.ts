@@ -1,23 +1,20 @@
 import { ModelError } from '../../../exceptions/errors.ts';
-import { CpfType } from '../../../models/CpfModel.ts';
+import { CnpjType } from '../../../models/CnpjModel.ts';
 import { Cnpj } from '../../../models/models.ts';
 import { onlyDigits } from '../../../utils/onlyDigits.ts';
 import { db } from '../database/db.ts';
-import type { filterType } from '../ICnpjRepository.ts';
+import type { QueryType } from '../ICnpjRepository.ts';
 import { ICnpjRepository } from '../ICnpjRepository.ts';
 
 export class CnpjRepository implements ICnpjRepository {
-  async findAll({ like }: filterType) {
+  async findAll({ like, sort }: QueryType): Promise<CnpjType[]> {
     try {
-      let exp;
-
-      if (like) {
-        exp = `WHERE c."value" LIKE \'%${onlyDigits(like)}%\'`;
-      }
+      const exp = like && `WHERE c."value" LIKE \'%${onlyDigits(like)}%\'`;
+      const order = sort || 'asc';
       const where = exp || '';
-      const { rows } = await db.queryObject<CpfType>({
+      const { rows } = await db.queryObject<CnpjType>({
         text:
-          `SELECT c.id, c."value" FROM "Cnpj" as c ${where} ORDER BY "value"`,
+          `SELECT c.id, c."value" FROM "Cnpj" as c ${where} ORDER BY "value" ${order}`,
       });
 
       return rows;

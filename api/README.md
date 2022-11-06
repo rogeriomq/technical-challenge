@@ -29,17 +29,17 @@ $ deno task test
 ## **Routes**
 
 ### Table of Routes:
-| Method  | Path           | query | body(json)     |
-|---------|----------------|-------|----------------|
-| GET     | /api/status    |       |                |
-| GET     | /api/cpf       |?like  |                |
-| GET     | /api/cnpj      |?like  |                |
-| POST    | /api/cpf       |       |{cpf: string}   |
-| POST    | /api/cnpj      |       |{cnpj: string}  |
-| PUT     | /api/cpf/:id   |       |{cpf: string}   |
-| PUT     | /api/cnpj/:id  |       |{cnpj: string}  |
-| DELETE  | /api/cpf/:id   |       |                |
-| DELETE  | /api/cnpj/:id  |       |                |
+| Method  | Path           | query                     | body(json)     |
+|---------|----------------|---------------------------|----------------|
+| GET     | /api/status    |                           |                |
+| GET     | /api/cpf       |?like=string&sort=asc|desc |                |
+| GET     | /api/cnpj      |?like=string&sort=asc|desc |                |
+| POST    | /api/cpf       |                           |{cpf: string}   |
+| POST    | /api/cnpj      |                           |{cnpj: string}  |
+| PUT     | /api/cpf/:id   |                           |{cpf: string}   |
+| PUT     | /api/cnpj/:id  |                           |{cnpj: string}  |
+| DELETE  | /api/cpf/:id   |                           |                |
+| DELETE  | /api/cnpj/:id  |                           |                |
 
 
 Have fun!
