@@ -22,7 +22,8 @@ $ docker exec -it neoway_api sh -c "deno task init:db"
 
 ### Address:
 API: http://127.0.0.1:4444
-> For access: http://127.0.0.1:4444/api/status
+> To test api, access http://127.0.0.1:4444/api/status
+
 SPA: http://127.0.0.1:8080
 
 
