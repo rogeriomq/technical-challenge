@@ -34,7 +34,6 @@ export class CnpjRepository implements ICnpjRepository {
         text: 'INSERT INTO "Cnpj"("value") VALUES ($cnpj)',
         args: { cnpj: cnpj.cleaned() },
       });
-      console.log({ result });
     } catch (e) {
       throw e;
     }
@@ -50,8 +49,6 @@ export class CnpjRepository implements ICnpjRepository {
         text: `UPDATE "Cnpj" SET "value" = $cnpj WHERE "id"=$id `,
         args: { cnpj: cnpj.cleaned(), id: id },
       });
-      console.log({ result });
-
       return result.rowCount || 0;
     } catch (error) {
       throw error;

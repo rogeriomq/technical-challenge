@@ -32,7 +32,6 @@ export class CpfRepository implements ICpfRepository {
         text: 'INSERT INTO "Cpf"("value") VALUES ($cpf)',
         args: { cpf: cpf.cleaned() },
       });
-      console.log({ result });
     } catch (e) {
       throw e;
     }
@@ -48,7 +47,6 @@ export class CpfRepository implements ICpfRepository {
         text: `UPDATE "Cpf" SET "value" = $cpf WHERE "id"=$id `,
         args: { cpf: cpf.cleaned(), id },
       });
-      console.log({ result });
       return result.rowCount || 0;
     } catch (error) {
       throw error;

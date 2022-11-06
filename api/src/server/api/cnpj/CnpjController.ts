@@ -18,7 +18,6 @@ export class CnpjController {
   list = async (context: RouterContext<string>) => {
     try {
       const { like, sort } = ctxHelpers.getQuery(context) as QueryType;
-      console.log({ like, sort });
       const result = await this.#cnpjRepository.findAll({ like, sort });
       context.response.status = HttpStatus.OK;
       context.response.body = {
@@ -36,8 +35,6 @@ export class CnpjController {
         context.response.status = HttpStatus.InternalServerError;
         return context;
       }
-
-      console.log(error);
     }
   };
 
@@ -83,8 +80,6 @@ export class CnpjController {
         };
         return context;
       }
-
-      console.log(error);
     }
   };
 
@@ -104,7 +99,6 @@ export class CnpjController {
         ? HttpStatus.OK
         : HttpStatus.NotFound;
     } catch (error) {
-      console.log(error);
       if (error instanceof ModelError) {
         context.response.status = HttpStatus.BadRequest;
         context.response.body = {
@@ -135,8 +129,6 @@ export class CnpjController {
         };
         return context;
       }
-
-      console.log(error);
     }
   };
 
@@ -153,7 +145,6 @@ export class CnpjController {
         ? HttpStatus.OK
         : HttpStatus.NotFound;
     } catch (error) {
-      console.log(error);
       if (error instanceof ModelError) {
         context.response.status = HttpStatus.BadRequest;
         context.response.body = {

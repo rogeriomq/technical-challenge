@@ -20,7 +20,6 @@ export class CpfController {
   list = async (context: RouterContext<string>) => {
     try {
       const { like, sort } = ctxHelpers.getQuery(context) as QueryType;
-      console.log({ like, sort });
       const result = await this.#cpfRepository.findAll({ like, sort });
       context.response.status = HttpStatus.OK;
       context.response.body = {
@@ -33,7 +32,6 @@ export class CpfController {
           message: 'Unable to retrieve records.',
         },
       };
-      console.log(error);
     }
   };
 
@@ -78,8 +76,6 @@ export class CpfController {
         };
         return context;
       }
-
-      console.log(error);
     }
   };
 
@@ -100,7 +96,6 @@ export class CpfController {
         : HttpStatus.NoContent;
     } catch (error) {
       context.response.status = HttpStatus.InternalServerError;
-      console.log(error);
       if (error instanceof ModelError) {
         context.response.body = {
           error: {
@@ -130,8 +125,6 @@ export class CpfController {
         };
         return context;
       }
-
-      console.log(error);
     }
   };
 
