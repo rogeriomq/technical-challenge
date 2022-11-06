@@ -1,19 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
     extend: {
       fontFamily: {
-        oswald: ['Oswald', 'sans-serif', 'sans'],
+        roboto: ['roboto', 'sans-serif']
       },
       colors: {
         primary: '#303965',
-        secondary: '#f0680a',
+        secondary: '#f0680a'
       }
-    },
+    }
   },
-  plugins: [],
+  plugins: []
 }

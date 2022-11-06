@@ -1,0 +1,23 @@
+@import "tooltip.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Robot";
+    src: url("./fonts/roboto/Roboto-Regular.ttf"),
+    url("./fonts/roboto/Roboto-Light.otf"),
+    url("./fonts/roboto/Roboto-Medium.otf"),
+    url("./fonts/roboto/Roboto-Bold.otf");
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply font-roboto;
+  }
+}

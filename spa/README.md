@@ -1,5 +1,5 @@
 # **Challenge - SPA**
-> This SPA use React, Vite, Typescript
+> This SPA(Single Page Application) use React, Vite, Typescript
 
 ## Instalation
 **Requiriments**
