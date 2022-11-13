@@ -1,5 +1,9 @@
 # Neoway Challenge
 
+## **REQUIRIMENT**
+- Docker;
+- Docker Compose;
+
 ### This repository contains two projects:
  1. API with Deno + Oak, [here](./api) for more details.
  2. SPA with Vite + TS + Reactjs, [here](./spa) for more details.
@@ -12,12 +16,12 @@ On API project, in `.env`, use _neoway_db_ has a **DB_HOST** when run with docke
 ## **Run**
 
 ```bash
-$ docker compose up
+docker-compose up
 ````
 
 And initalize database with command:
 ```
-$ docker exec -it neoway_api sh -c "deno task init:db"
+docker exec -it neoway_api sh -c "deno task init:db"
 ```
 
 ### Address:
