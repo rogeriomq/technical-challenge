@@ -14,7 +14,11 @@ export class CnpjRepository implements ICnpjRepository {
       const where = exp || '';
       const { rows } = await db.queryObject<CnpjType>({
         text:
-          `SELECT c.id, c."value" FROM "Cnpj" as c ${where} ORDER BY "value" ${order}`,
+          'SELECT c.id, c."value" FROM "Cnpj" as c $where ORDER BY "value" $order',
+        args: {
+          where,
+          order,
+        },
       });
 
       return rows;
