@@ -1,4 +1,4 @@
-import { validateCnpj } from '../utils/validateCnpj.ts';
+import CnpjValidator from '../utils/CnpjValidator.ts';
 import { ICpfCnpjModel } from './ICpfCnpjModel.ts';
 
 export type CnpjType = {
@@ -9,10 +9,12 @@ export type CnpjType = {
 export class Cnpj implements ICpfCnpjModel {
   id: number | undefined;
   value: string;
+  cnpjValidator: CnpjValidator;
 
   constructor({ id, value }: CnpjType) {
     this.id = id;
     this.value = value;
+    this.cnpjValidator = new CnpjValidator();
   }
 
   static instance(): Cnpj {
@@ -20,7 +22,7 @@ export class Cnpj implements ICpfCnpjModel {
   }
 
   validate(): string | null {
-    return validateCnpj(this.value + '');
+    return this.cnpjValidator.validate(this.value + '');
   }
 
   cleaned(): string {

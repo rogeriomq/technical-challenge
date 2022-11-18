@@ -1,4 +1,4 @@
-import { validateCpf } from '../utils/validateCpf.ts';
+import CpfValidator from '../utils/CpfValidator.ts';
 import { ICpfCnpjModel } from './ICpfCnpjModel.ts';
 
 export type CpfType = {
@@ -9,10 +9,12 @@ export type CpfType = {
 export class Cpf implements ICpfCnpjModel {
   id: number | undefined;
   value: string;
+  cpfValidator: CpfValidator;
 
   constructor({ id, value }: CpfType) {
     this.id = id;
     this.value = value;
+    this.cpfValidator = new CpfValidator();
   }
 
   static instance(): Cpf {
@@ -25,7 +27,7 @@ export class Cpf implements ICpfCnpjModel {
    * @returns String Error or null when is valid.
    */
   validate(): string | null {
-    return validateCpf(this.value + '');
+    return this.cpfValidator.validate(this.value + '');
   }
 
   cleaned(): string {
