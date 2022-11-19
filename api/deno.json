@@ -49,8 +49,8 @@
     "dev": "deno run -A --watch main.ts",
     "init:db": "deno run -A initDatabase.ts",
     "run": "deno run --allow-net --allow-env --allow-read main.ts",
-    "test": "deno test -A",
-    "test:w": "deno test --watch -A src/test/"
+    "test": "deno test -A -q --parallel",
+    "test:w": "deno test --watch -A  src/test/"
   },
   "test": {
     "files": {
