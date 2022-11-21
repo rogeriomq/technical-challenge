@@ -1,6 +1,6 @@
 import { Router } from '../../../../deps.ts';
 import { CpfRepository } from '../../repositories/impl/CpfRepository.ts';
-import { Api } from '../api.ts';
+import { Api } from '../IApi.ts';
 import { CpfController } from './CpfController.ts';
 
 export class CpfApi implements Api {

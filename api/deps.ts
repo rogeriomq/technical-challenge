@@ -11,6 +11,12 @@ export { validate as validateCnpjDep } from 'https://deno.land/x/cnpj@v4.0.1/mod
 export { oakCors } from 'https://deno.land/x/cors@v1.2.2/mod.ts';
 export { validate as validateCpfDep } from 'https://deno.land/x/cpf@v1.0.2/mod.ts';
 export { default as debug } from 'https://deno.land/x/debuglog@v1.0.0/debug.ts';
+export {
+  Database,
+  DataTypes,
+  Model,
+  PostgresConnector,
+} from 'https://deno.land/x/denodb@v1.1.0/mod.ts';
 export { default as dayjs } from 'https://deno.land/x/deno_dayjs@v0.2.2/mod.ts';
 export { config as dotEnvConfig } from 'https://deno.land/x/dotenv@v3.2.0/mod.ts';
 export {

@@ -1,6 +1,6 @@
 import { Router } from '../../../../deps.ts';
 import { CnpjRepository } from '../../repositories/impl/CnpjRepository.ts';
-import { Api } from '../api.ts';
+import { Api } from '../IApi.ts';
 import { CnpjController } from './CnpjController.ts';
 
 export class CnpjApi implements Api {

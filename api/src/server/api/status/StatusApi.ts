@@ -1,6 +1,6 @@
 import { dayjs, Router, RouterContext } from '../../../../deps.ts';
 import { CountRequests } from '../../CountRequests.ts';
-import { Api } from '../api.ts';
+import { Api } from '../IApi.ts';
 
 type StatusApiProps = {
   path?: string;

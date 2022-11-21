@@ -1,14 +1,19 @@
 import { ModelError } from '../../../exceptions/errors.ts';
-import { CnpjType } from '../../../models/CnpjModel.ts';
-import { Cnpj } from '../../../models/models.ts';
+import { Cnpj, CnpjType } from '../../../models/CnpjModel.ts';
 import { onlyDigits } from '../../../utils/onlyDigits.ts';
 import { db } from '../database/db.ts';
+// import IDb from '../database/IDb.ts';
 import type { QueryType } from '../ICnpjRepository.ts';
-import { ICnpjRepository } from '../ICnpjRepository.ts';
+import { IRepository } from '../IRepository.ts';
 
-export class CnpjRepository implements ICnpjRepository {
+export class CnpjRepository implements IRepository<Cnpj, CnpjType> {
+  // #db;
+  // constructor(db: IDb) {
+  //   this.#db = db;
+  // }
   async findAll({ like, sort }: QueryType): Promise<CnpjType[]> {
     try {
+      // const connection = await this.#db.connection();
       const exp = like && `WHERE c."value" LIKE \'%${onlyDigits(like)}%\'`;
       const order = sort || 'asc';
       const where = exp || '';
@@ -27,8 +32,8 @@ export class CnpjRepository implements ICnpjRepository {
     }
   }
 
-  async create(cnpj: Cnpj): Promise<void> {
-    const isInvalid = cnpj.validate();
+  async create(model: Cnpj): Promise<void> {
+    const isInvalid = model.validate();
     if (isInvalid) {
       throw new ModelError(isInvalid);
     }
@@ -36,7 +41,7 @@ export class CnpjRepository implements ICnpjRepository {
     try {
       const result = await db.queryObject({
         text: 'INSERT INTO "Cnpj"("value") VALUES ($cnpj)',
-        args: { cnpj: cnpj.cleaned() },
+        args: { cnpj: model.cleaned() },
       });
     } catch (e) {
       throw e;
